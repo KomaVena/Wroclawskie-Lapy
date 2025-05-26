@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,8 +16,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Успешный вход!");
-      // Здесь можно добавить перенаправление на защищённую страницу, например:
-      // navigate("/search");
+      navigate("/search"); // переходим на страницу Найти выгуливателя
     } catch (err) {
       setError("Ошибка входа: " + err.message);
     }

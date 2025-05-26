@@ -1,4 +1,3 @@
-// src/pages/Booking.jsx
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
@@ -6,27 +5,75 @@ import { Container, Form, Button } from "react-bootstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 
-import { useAuth } from "../context/AuthContext"; // если есть контекст с юзером
+import { useAuth } from "../context/AuthContext";
+
+import emailjs from "emailjs-com";
 
 const Booking = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Получаем переданного выгуливателя из Search
   const selectedWalker = location.state?.walker;
-
   const { user } = useAuth();
 
-  // Данные для брони
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
   useEffect(() => {
     if (!selectedWalker) {
-      // Если не выбрали выгуливателя, переадресуем обратно в поиск
       navigate("/search");
     }
   }, [selectedWalker, navigate]);
+
+  // Отправка email клиенту
+  const sendEmailToClient = (bookingData) => {
+    emailjs
+      .send(
+        "service_oeeovhy",
+        "template_pobe5o2", // шаблон для клиента
+        {
+          name: user.displayName || "Клиент",
+          client_email: bookingData.userEmail,
+          walker_name: bookingData.walkerName,
+          booking_date: bookingData.date,
+          booking_time: bookingData.time,
+        },
+        "X_wcCL0KW8SXVu1TA"
+      )
+      .then(
+        (result) => {
+          console.log("Email to client sent:", result.text);
+        },
+        (error) => {
+          console.error("Email to client error:", error.text);
+        }
+      );
+  };
+
+  // Отправка email выгуливателю
+  const sendEmailToWalker = (bookingData) => {
+    emailjs
+      .send(
+        "service_oeeovhy",
+        "template_bvotrej", // шаблон для выгуливателя
+        {
+          walker_name: bookingData.walkerName,
+          booking_date: bookingData.date,
+          booking_time: bookingData.time,
+          client_email: bookingData.userEmail,
+        },
+        "X_wcCL0KW8SXVu1TA"
+      )
+      .then(
+        (result) => {
+          console.log("Email to walker sent:", result.text);
+        },
+        (error) => {
+          console.error("Email to walker error:", error.text);
+        }
+      );
+  };
+  console.log("User email:", user.email);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +84,7 @@ const Booking = () => {
     }
 
     try {
-      await addDoc(collection(db, "bookings"), {
+      const bookingData = {
         walkerId: selectedWalker.id,
         walkerName: selectedWalker.name,
         userId: user.uid,
@@ -45,9 +92,16 @@ const Booking = () => {
         date,
         time,
         createdAt: new Date(),
-      });
+      };
+
+      await addDoc(collection(db, "bookings"), bookingData);
+
+      // Отправляем два письма
+      sendEmailToClient(bookingData);
+      sendEmailToWalker(bookingData);
+
       alert("Спасибо! Ваше бронирование успешно отправлено.");
-      navigate("/search"); // или куда хочешь после успешного бронирования
+      navigate("/search");
     } catch (error) {
       console.error("Ошибка при отправке бронирования:", error);
       alert("Ошибка при отправке бронирования.");

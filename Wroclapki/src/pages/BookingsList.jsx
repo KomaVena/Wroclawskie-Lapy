@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Container, Table, Spinner, Alert, Button } from "react-bootstrap";
 import { db } from "../services/firebase";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const BookingsList = () => {
   const [bookings, setBookings] = useState([]);
@@ -11,7 +19,20 @@ const BookingsList = () => {
   const fetchBookings = async () => {
     try {
       setLoading(true);
-      const querySnapshot = await getDocs(collection(db, "bookings"));
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        setError("Пользователь не авторизован");
+        setLoading(false);
+        return;
+      }
+
+      const q = query(
+        collection(db, "bookings"),
+        where("userId", "==", user.uid)
+      );
+      const querySnapshot = await getDocs(q);
       const bookingsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -31,7 +52,6 @@ const BookingsList = () => {
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "bookings", id));
-      // Обновляем список после удаления
       setBookings(bookings.filter((booking) => booking.id !== id));
     } catch (err) {
       alert("Ошибка при удалении бронирования");
@@ -43,7 +63,7 @@ const BookingsList = () => {
 
   return (
     <Container>
-      <h2>Список бронирований</h2>
+      <h2>Мои бронирования</h2>
       <Table striped bordered hover>
         <thead>
           <tr>

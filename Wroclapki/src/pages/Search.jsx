@@ -10,7 +10,7 @@ const walkersData = [
     area: "Śródmieście",
     price: 40,
     experience: "2 года",
-    image: "https://placekitten.com/200/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const walkersData = [
     area: "Krzyki",
     price: 50,
     experience: "4 года",
-    image: "https://placekitten.com/201/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const walkersData = [
     area: "Fabryczna",
     price: 35,
     experience: "1 год",
-    image: "https://placekitten.com/202/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const walkersData = [
     area: "Psie Pole",
     price: 45,
     experience: "3 года",
-    image: "https://placekitten.com/203/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const walkersData = [
     area: "Biskupin",
     price: 60,
     experience: "5 лет",
-    image: "https://placekitten.com/204/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 6,
@@ -50,7 +50,7 @@ const walkersData = [
     area: "Ołbin",
     price: 38,
     experience: "2 года",
-    image: "https://placekitten.com/205/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 7,
@@ -58,7 +58,7 @@ const walkersData = [
     area: "Gaj",
     price: 42,
     experience: "3 года",
-    image: "https://placekitten.com/206/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 8,
@@ -66,7 +66,7 @@ const walkersData = [
     area: "Grabiszyn",
     price: 55,
     experience: "6 лет",
-    image: "https://placekitten.com/207/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
   {
     id: 9,
@@ -74,7 +74,7 @@ const walkersData = [
     area: "Pilczyce",
     price: 48,
     experience: "4 года",
-    image: "https://placekitten.com/208/200",
+    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
   },
 ];
 

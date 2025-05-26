@@ -18,6 +18,7 @@ import Register from "./pages/Register";
 import Search from "./pages/Search";
 import Booking from "./pages/Booking.jsx";
 import BookingsList from "./pages/BookingsList";
+import Reviews from "./pages/Reviews";
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -61,6 +62,9 @@ function App() {
                 </PrivateRoute>
               }
             />
+
+            {/* Сделали страницу отзывов открытой */}
+            <Route path="/reviews" element={<Reviews />} />
           </Routes>
         </main>
       </Router>

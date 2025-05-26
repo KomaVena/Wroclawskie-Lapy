@@ -1,9 +1,7 @@
-// src/components/Navbar.jsx
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   const { user, logout } = useAuth();
@@ -30,19 +28,23 @@ const Navigation = () => {
             <Nav.Link as={Link} to="/">
               Главная
             </Nav.Link>
+
+            {/* Отзывы видны ВСЕМ */}
+
             {user && (
               <>
                 <Nav.Link as={Link} to="/search">
                   Поиск
                 </Nav.Link>
-                <Nav.Link as={Link} to="/booking">
-                  Бронирование
+
+                <Nav.Link as={Link} to="/bookings">
+                  Мои брони
                 </Nav.Link>
-                <NavLink className="nav-link" to="/bookings">
-                  moia bron
-                </NavLink>
               </>
             )}
+            <Nav.Link as={Link} to="/reviews">
+              Отзывы
+            </Nav.Link>
           </Nav>
           <Nav>
             {user ? (
