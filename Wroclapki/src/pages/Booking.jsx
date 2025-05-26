@@ -30,7 +30,7 @@ const Booking = () => {
     emailjs
       .send(
         "service_oeeovhy",
-        "template_pobe5o2", // шаблон для клиента
+        "template_pobe5o2",
         {
           name: user.displayName || "Клиент",
           client_email: bookingData.userEmail,
@@ -55,7 +55,7 @@ const Booking = () => {
     emailjs
       .send(
         "service_oeeovhy",
-        "template_bvotrej", // шаблон для выгуливателя
+        "template_bvotrej",
         {
           walker_name: bookingData.walkerName,
           booking_date: bookingData.date,
@@ -79,7 +79,7 @@ const Booking = () => {
     e.preventDefault();
 
     if (!date || !time) {
-      alert("Пожалуйста, выберите дату и время");
+      alert("Please select date and time");
       return;
     }
 
@@ -100,11 +100,11 @@ const Booking = () => {
       sendEmailToClient(bookingData);
       sendEmailToWalker(bookingData);
 
-      alert("Спасибо! Ваше бронирование успешно отправлено.");
+      alert("Thank you! Your reservation has been sent successfully.");
       navigate("/search");
     } catch (error) {
-      console.error("Ошибка при отправке бронирования:", error);
-      alert("Ошибка при отправке бронирования.");
+      console.error("Error sending booking:", error);
+      alert("Error sending booking.");
     }
   };
 
@@ -112,11 +112,11 @@ const Booking = () => {
 
   return (
     <Container className="my-4">
-      <h2>Бронирование с {selectedWalker.name}</h2>
+      <h2>Booking with {selectedWalker.name}</h2>
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>Дата</Form.Label>
+          <Form.Label>Date</Form.Label>
           <Form.Control
             type="date"
             value={date}
@@ -126,7 +126,7 @@ const Booking = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Время</Form.Label>
+          <Form.Label>Time</Form.Label>
           <Form.Control
             type="time"
             value={time}
@@ -135,7 +135,7 @@ const Booking = () => {
           />
         </Form.Group>
 
-        <Button type="submit">Забронировать</Button>
+        <Button type="submit">Book now</Button>
       </Form>
     </Container>
   );

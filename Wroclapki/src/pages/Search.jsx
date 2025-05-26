@@ -6,75 +6,75 @@ import { useNavigate } from "react-router-dom";
 const walkersData = [
   {
     id: 1,
-    name: "Anna Nowak",
+    name: "Nikta Dovnich",
     area: "Śródmieście",
     price: 40,
-    experience: "2 года",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "2 years",
+    image: "/public/man.png",
   },
   {
     id: 2,
     name: "Piotr Kowalski",
     area: "Krzyki",
     price: 50,
-    experience: "4 года",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "4 years",
+    image: "/public/man.png",
   },
   {
     id: 3,
     name: "Kasia Wrocławska",
     area: "Fabryczna",
     price: 35,
-    experience: "1 год",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "1 years",
+    image: "/public/women.png",
   },
   {
     id: 4,
     name: "Tomasz Zieliński",
     area: "Psie Pole",
     price: 45,
-    experience: "3 года",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "3 years",
+    image: "/public/man.png",
   },
   {
     id: 5,
     name: "Monika Stępień",
     area: "Biskupin",
     price: 60,
-    experience: "5 лет",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "5 years",
+    image: "/public/women.png",
   },
   {
     id: 6,
     name: "Jakub Maj",
     area: "Ołbin",
     price: 38,
-    experience: "2 года",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "2 years",
+    image: "/public/women.png",
   },
   {
     id: 7,
-    name: "Zuzanna Kaczmarek",
+    name: "Kseniya Kuchuk",
     area: "Gaj",
     price: 42,
-    experience: "3 года",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "3 years",
+    image: "/public/women.png",
   },
   {
     id: 8,
     name: "Michał Wiśniewski",
     area: "Grabiszyn",
     price: 55,
-    experience: "6 лет",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    experience: "6 years",
+    image: "/public/man.png",
   },
   {
     id: 9,
-    name: "Natalia Jankowska",
+    name: "Yelyzaveta Hlushchenko",
     area: "Pilczyce",
-    price: 48,
-    experience: "4 года",
-    image: "https://www.svgrepo.com/show/493421/man-thinking.svg",
+    price: 8,
+    experience: "30 years",
+    image: "/public/women.png",
   },
 ];
 
@@ -98,19 +98,19 @@ const Search = () => {
 
   return (
     <Container className="my-4">
-      <h2 className="mb-4">Найти выгуливателя</h2>
+      <h2 className="mb-4">Find a dog walker</h2>
 
       <Form className="mb-4">
         <Row>
           <Col md={4}>
             <Form.Group controlId="area">
-              <Form.Label>Район</Form.Label>
+              <Form.Label>District</Form.Label>
               <Form.Select
                 name="area"
                 value={filters.area}
                 onChange={handleChange}
               >
-                <option value="">Все районы</option>
+                <option value="">all district</option>
                 <option value="Śródmieście">Śródmieście</option>
                 <option value="Krzyki">Krzyki</option>
                 <option value="Fabryczna">Fabryczna</option>
@@ -125,7 +125,7 @@ const Search = () => {
           </Col>
           <Col md={4}>
             <Form.Group controlId="price">
-              <Form.Label>Макс. цена ({filters.maxPrice} zł)</Form.Label>
+              <Form.Label>Max price ({filters.maxPrice} zł)</Form.Label>
               <Form.Range
                 name="maxPrice"
                 min="0"
@@ -142,20 +142,25 @@ const Search = () => {
       <Row>
         {filteredWalkers.map((walker) => (
           <Col md={4} key={walker.id} className="mb-4">
-            <Card>
-              <Card.Img variant="top" src={walker.image} />
+            <Card className="text-center">
+              <Card.Img
+                variant="top"
+                src={walker.image}
+                className="rounded-circle mx-auto mt-3"
+                style={{ width: "120px", height: "120px", objectFit: "cover" }}
+              />
               <Card.Body>
                 <Card.Title>{walker.name}</Card.Title>
                 <Card.Text>
-                  Район: {walker.area} <br />
-                  Опыт: {walker.experience} <br />
-                  Цена: {walker.price} zł
+                  District: {walker.area} <br />
+                  Experience: {walker.experience} <br />
+                  Price: {walker.price} zł
                 </Card.Text>
                 <Button
                   variant="primary"
                   onClick={() => handleBookingClick(walker)}
                 >
-                  Забронировать
+                  Reserve
                 </Button>
               </Card.Body>
             </Card>

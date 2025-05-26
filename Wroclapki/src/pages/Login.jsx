@@ -15,21 +15,21 @@ export default function Login() {
     setError(null);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Успешный вход!");
+      alert("Successful login!");
       navigate("/search"); // переходим на страницу Найти выгуливателя
     } catch (err) {
-      setError("Ошибка входа: " + err.message);
+      setError("Login error: " + err.message);
     }
   };
 
   return (
     <div className="container mt-5" style={{ maxWidth: "400px" }}>
-      <h2 className="mb-4">Вход в систему</h2>
+      <h2 className="mb-4">Login</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
-            Email адрес
+            Email
           </label>
           <input
             type="email"
@@ -38,12 +38,12 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder="Введите email"
+            placeholder="Enter email"
           />
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="form-label">
-            Пароль
+            Password
           </label>
           <input
             type="password"
@@ -52,11 +52,11 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            placeholder="Введите пароль"
+            placeholder="Enter password"
           />
         </div>
         <button type="submit" className="btn btn-primary w-100">
-          Войти
+          Login
         </button>
       </form>
     </div>

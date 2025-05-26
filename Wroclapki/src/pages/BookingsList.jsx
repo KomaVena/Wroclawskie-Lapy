@@ -23,7 +23,7 @@ const BookingsList = () => {
       const user = auth.currentUser;
 
       if (!user) {
-        setError("Пользователь не авторизован");
+        setError("User is not authorized");
         setLoading(false);
         return;
       }
@@ -40,7 +40,7 @@ const BookingsList = () => {
       setBookings(bookingsData);
       setLoading(false);
     } catch (err) {
-      setError("Ошибка при загрузке бронирований");
+      setError("Error loading reservations");
       setLoading(false);
     }
   };
@@ -54,7 +54,7 @@ const BookingsList = () => {
       await deleteDoc(doc(db, "bookings", id));
       setBookings(bookings.filter((booking) => booking.id !== id));
     } catch (err) {
-      alert("Ошибка при удалении бронирования");
+      alert("Error deleting booking");
     }
   };
 
@@ -63,22 +63,22 @@ const BookingsList = () => {
 
   return (
     <Container>
-      <h2>Мои бронирования</h2>
+      <h2>My bookings</h2>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Имя</th>
-            <th>Выгуливатель</th>
-            <th>Дата</th>
-            <th>Время</th>
-            <th>Действия</th>
+            <th>🐶</th>
+            <th>Pets walker</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {bookings.length === 0 && (
             <tr>
               <td colSpan="5" className="text-center">
-                Нет бронирований
+                No reservations
               </td>
             </tr>
           )}
@@ -94,7 +94,7 @@ const BookingsList = () => {
                   size="sm"
                   onClick={() => handleDelete(id)}
                 >
-                  Удалить
+                  Delete
                 </Button>
               </td>
             </tr>

@@ -12,7 +12,7 @@ const Navigation = () => {
       await logout();
       navigate("/login");
     } catch (error) {
-      console.error("Ошибка при выходе:", error);
+      console.error("Error on exit:", error);
     }
   };
 
@@ -20,47 +20,53 @@ const Navigation = () => {
     <Navbar bg="light" expand="lg" className="mb-4 shadow-sm">
       <Container>
         <Navbar.Brand as={Link} to="/">
+          <img
+            src="/dog.svg"
+            alt="Wroclapki Logo"
+            width="30"
+            height="30"
+            className="d-inline-block align-top me-2"
+          />
           Wroclapki
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">
-              Главная
+              Home
             </Nav.Link>
-
-            {/* Отзывы видны ВСЕМ */}
 
             {user && (
               <>
                 <Nav.Link as={Link} to="/search">
-                  Поиск
+                  Search
                 </Nav.Link>
 
                 <Nav.Link as={Link} to="/bookings">
-                  Мои брони
+                  My reservations
                 </Nav.Link>
               </>
             )}
             <Nav.Link as={Link} to="/reviews">
-              Отзывы
+              Reviews
             </Nav.Link>
           </Nav>
           <Nav>
             {user ? (
               <>
-                <Navbar.Text className="me-3">Привет, {user.email}</Navbar.Text>
+                <Navbar.Text className="me-3">Hello, {user.email}</Navbar.Text>
                 <Button variant="outline-danger" onClick={handleLogout}>
-                  Выйти
+                  Log out
                 </Button>
               </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/login">
-                  Вход
+                  login
                 </Nav.Link>
                 <Nav.Link as={Link} to="/register">
-                  Регистрация
+                  Registration
                 </Nav.Link>
               </>
             )}

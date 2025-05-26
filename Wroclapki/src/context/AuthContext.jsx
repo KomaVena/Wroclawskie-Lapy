@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
       setUser(currentUser);
       setLoading(false);
     });
-    return unsubscribe; // очистка при размонтировании
+    return unsubscribe;
   }, []);
 
   const login = (email, password) => {

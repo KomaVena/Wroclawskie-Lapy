@@ -31,7 +31,6 @@ function App() {
       <Router>
         <Navbar />
 
-        {/* Основной контент с отступом сверху, чтобы не налезал на Navbar */}
         <main className="container mt-4">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -63,7 +62,6 @@ function App() {
               }
             />
 
-            {/* Сделали страницу отзывов открытой */}
             <Route path="/reviews" element={<Reviews />} />
           </Routes>
         </main>

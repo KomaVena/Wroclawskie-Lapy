@@ -40,7 +40,7 @@ const Reviews = () => {
       }));
       setReviews(reviewsList);
     } catch (err) {
-      console.error("Ошибка при загрузке отзывов:", err);
+      console.error("Error loading reviews:", err);
     }
     setLoading(false);
   };
@@ -52,11 +52,11 @@ const Reviews = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
-      setError("Вы должны быть авторизованы, чтобы оставить отзыв.");
+      setError("You must be logged in to leave a review..");
       return;
     }
     if (!newReview.trim()) {
-      setError("Отзыв не может быть пустым.");
+      setError("The review cannot be empty.");
       return;
     }
 
@@ -73,8 +73,8 @@ const Reviews = () => {
       setError("");
       fetchReviews();
     } catch (err) {
-      console.error("Ошибка при добавлении отзыва:", err);
-      setError("Не удалось добавить отзыв. Попробуйте позже.");
+      console.error("Error adding review:", err);
+      setError("Failed to add review. Try again later..");
     }
   };
 
@@ -83,7 +83,7 @@ const Reviews = () => {
       await deleteDoc(doc(db, "Reviews", id));
       setReviews(reviews.filter((rev) => rev.id !== id));
     } catch (err) {
-      console.error("Ошибка при удалении отзыва:", err);
+      console.error("Error deleting review:", err);
     }
   };
 
@@ -97,7 +97,7 @@ const Reviews = () => {
 
   return (
     <Container className="my-4">
-      <h2>Отзывы</h2>
+      <h2>Reviews</h2>
 
       {loading ? (
         <Spinner animation="border" />
@@ -114,7 +114,7 @@ const Reviews = () => {
                   className="mt-2"
                   onClick={() => handleDelete(rev.id)}
                 >
-                  Удалить
+                  Delete
                 </Button>
               )}
             </ListGroup.Item>
@@ -125,18 +125,18 @@ const Reviews = () => {
       {user ? (
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="reviewText" className="mb-3">
-            <Form.Label>Оставить отзыв</Form.Label>
+            <Form.Label>Leave a review</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
               value={newReview}
               onChange={(e) => setNewReview(e.target.value)}
-              placeholder="Напишите ваш отзыв..."
+              placeholder="Write your review..."
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Оценка</Form.Label>
+            <Form.Label>Grade</Form.Label>
             <div style={{ fontSize: "1.5rem" }}>
               {[1, 2, 3, 4, 5].map((val) => (
                 <span
@@ -147,7 +147,7 @@ const Reviews = () => {
                     color: val <= selectedRating ? "#ffc107" : "#e4e5e9",
                     transition: "color 0.2s",
                   }}
-                  title={`${val} звёзд`}
+                  title={`${val} stars`}
                 >
                   ★
                 </span>
@@ -156,10 +156,10 @@ const Reviews = () => {
           </Form.Group>
 
           {error && <Alert variant="danger">{error}</Alert>}
-          <Button type="submit">Добавить отзыв</Button>
+          <Button type="submit">Add a review</Button>
         </Form>
       ) : (
-        <Alert variant="info">Войдите в систему, чтобы оставить отзыв.</Alert>
+        <Alert variant="info">Please sign in to leave a review.</Alert>
       )}
     </Container>
   );
